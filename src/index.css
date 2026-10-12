@@ -1,0 +1,123 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+/* ---------- Theme tokens (RGB channels so Tailwind opacity modifiers work) ---------- */
+:root {
+  color-scheme: light;
+  --canvas: 245 246 248;
+  --surface: 255 255 255;
+  --surface-2: 249 250 251;
+  --line: 228 231 236;
+  --sidebar: 12 29 58;
+  --contrast: 12 29 58;
+  --on-contrast: 255 255 255;
+  --ink: 16 24 40;
+  --ink-soft: 71 84 103;
+  --ink-muted: 102 112 133;
+  --brand-50: 234 247 239;
+  --brand-100: 205 238 217;
+  --brand-500: 31 168 85;
+  --brand-600: 22 144 74;
+  --brand-700: 17 115 59;
+  --danger-50: 254 241 240;
+  --danger-600: 217 45 32;
+  --danger-700: 180 35 24;
+  --warn-50: 255 247 230;
+  --warn-600: 220 104 3;
+  --warn-700: 181 71 8;
+  --info-50: 238 244 255;
+  --info-600: 62 99 221;
+  --info-700: 45 79 184;
+}
+.dark {
+  color-scheme: dark;
+  --canvas: 11 17 32;
+  --surface: 19 27 45;
+  --surface-2: 15 22 38;
+  --line: 38 50 74;
+  --sidebar: 7 12 24;
+  --contrast: 226 232 242;
+  --on-contrast: 12 29 58;
+  --ink: 230 235 243;
+  --ink-soft: 184 194 212;
+  --ink-muted: 139 151 173;
+  --brand-50: 15 46 30;
+  --brand-100: 20 70 43;
+  --brand-500: 31 168 85;
+  --brand-600: 26 150 78;
+  --brand-700: 37 170 92;
+  --danger-50: 60 20 22;
+  --danger-600: 217 45 32;
+  --danger-700: 249 112 102;
+  --warn-50: 58 42 10;
+  --warn-600: 220 104 3;
+  --warn-700: 253 176 34;
+  --info-50: 23 37 84;
+  --info-600: 107 140 240;
+  --info-700: 143 176 255;
+}
+html,
+body,
+#root {
+  min-height: 100%;
+}
+body {
+  /* Inter has no Devanagari glyphs, so Hindi text falls through to Noto Sans Devanagari */
+  font-family: 'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background-color: rgb(var(--canvas));
+  color: rgb(var(--ink));
+  -webkit-font-smoothing: antialiased;
+}
+/* Zero-specificity defaults so utility classes still win */
+:where(input:not([type='checkbox']):not([type='radio']):not([type='range']), select, textarea) {
+  background-color: rgb(var(--surface));
+  color: rgb(var(--ink));
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Brief, subtle colour transition while switching theme */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: background-color 200ms ease-out, border-color 200ms ease-out, color 200ms ease-out, fill 200ms ease-out,
+    stroke 200ms ease-out !important;
+}
+/* Print only the receipt when printReceipt() is used */
+@media print {
+  body.print-receipt-mode * {
+    visibility: hidden !important;
+  }
+  body.print-receipt-mode .receipt-print,
+  body.print-receipt-mode .receipt-print * {
+    visibility: visible !important;
+    color: #000 !important;
+    border-color: #999 !important;
+  }
+  body.print-receipt-mode .receipt-print {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 380px;
+    background: #fff !important;
+    border: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
